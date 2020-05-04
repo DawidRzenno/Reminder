@@ -26,7 +26,6 @@ COMPLETED (see: ReminderStatus enum)
 The empty constructor of this class is needed by Spring to run.
 ######################################################################################## */
     
-
 @Entity
 @Table(name = "reminders")
 class Reminder {
