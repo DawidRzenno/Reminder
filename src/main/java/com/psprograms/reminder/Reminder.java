@@ -9,22 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-/* ########################################################################################
-This is the Reminder entity. Every object of this class is going to have unique ID and 
-this set of fields: 
-* title - this field describes the entire reminder object in a couple of words,
-* content - this one is much longer, as the name says it's the main part of a reminder,
-* creationDate - this field holds the date in which the reminder has been created, it
-sets itself within the constructor,
-* targetDate - this part is pretty important, the object will notify user only when 
-the actual date and targetDate are the same
-(NOTICE! both creationDate and targetDate fields provice methods for parsing strings!),
-* status - this field holds values like TO_DO, IN_PROGRESS or 
-COMPLETED (see: ReminderStatus enum)
-
-The empty constructor of this class is needed by Spring to run.
-######################################################################################## */
     
 @Entity
 @Table(name = "reminders")
@@ -44,7 +28,7 @@ class Reminder {
     @Column(name = "target_date", nullable = false, columnDefinition = "DATE")
     private LocalDate targetDate;
 
-    @Column(name = "tatget_time", nullable = false, columnDefinition = "TIME")
+    @Column(name = "target_time", nullable = true, columnDefinition = "TIME")
     private LocalTime targetTime;
 
     @Column(name = "status", nullable = false, columnDefinition = "VARCHAR(32)")
