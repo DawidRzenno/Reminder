@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Reminder} from './reminder';
 
 @Component({
   selector: 'app-reminder',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReminderComponent implements OnInit {
 
+  @Input() reminder: Reminder;
+  whenFinished: any; // TODO: calculate reminder.targetTime + reminder.targetDate for TimerComponent
+
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
 }

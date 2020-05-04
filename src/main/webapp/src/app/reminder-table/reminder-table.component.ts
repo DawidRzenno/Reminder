@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {ReminderTableService} from "./reminder-table.service";
+import { ReminderTableService } from './reminder-table.service';
+import { Reminder } from './reminder/reminder';
+
+class RestResponse {
+  // tslint:disable:variable-name
+  _embedded: any;
+  _links: any;
+}
 
 @Component({
   selector: 'app-reminder-table',
@@ -8,28 +15,21 @@ import {ReminderTableService} from "./reminder-table.service";
 })
 export class ReminderTableComponent implements OnInit {
 
-  reminderId: string;
+  reminders: Reminder[];
 
   constructor(private reminderTableService: ReminderTableService) { }
 
   ngOnInit(): void {
-
-
+    this.loadReminders();
   }
 
-  getReminder(id: string) {
-    this.reminderTableService.getReminder(id).subscribe({
-      next: response => {
-        console.log('reminder #' + id + ' =>', response);
-      }
-    });
-  }
-
-  getReminders() {
+  loadReminders() {
     this.reminderTableService.getReminders().subscribe({
-      next: response => {
-        console.log('reminders =>', response);
-      }
+      next: (response: RestResponse) => {
+        this.reminders = response._embedded.reminderList;
+      },
+      error: (response => console.error(response)),
+      complete: (() => console.log('this.reminders = ', this.reminders))
     });
   }
 

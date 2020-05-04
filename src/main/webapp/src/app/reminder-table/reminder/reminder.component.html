@@ -1,1 +1,19 @@
-<p>reminder works!</p>
+<div class="reminder">
+    <div class="reminder__header">
+        <div class="header__reminder-id">
+            {{reminder.id}}
+        </div>
+        <div class="header__reminder-title">
+            {{reminder.title}}
+        </div>
+        <div class="header__reminder-status">
+            {{reminder.status}}
+        </div>
+    </div>
+    <div class="timer">
+        <app-timer [whenStarted]="reminder.creationDate" [whenFinished]="whenFinished"></app-timer>
+    </div>
+    <div class="reminder__content">
+        {{reminder.content}}
+    </div>
+</div>

@@ -1,5 +1,9 @@
-<p>reminder-table works!</p>
-{{reminderId}}
-<input [(ngModel)]="reminderId">
-<button (click)="getReminder(reminderId)">GET REMINDER</button>
-<button (click)="getReminders()">GET REMINDERS</button>
+<div class="reminder-table" *ngIf="reminders?.length > 0; else noRemindersInfo" >
+    <div *ngFor="let reminder of reminders">
+        <app-reminder [reminder]="reminder"></app-reminder>
+    </div>
+</div>
+
+<ng-template #noRemindersInfo>
+    No reminders yet. Add some more :)
+</ng-template>

@@ -1,0 +1,35 @@
+.reminder {
+  border: 1px lightgray solid;
+  background-color: #eeeeee;
+  padding: 10px;
+  margin: 5px;
+  width: 300px;
+}
+
+.reminder__content {
+  border: 1px lightgray solid;
+  background-color: #eeeeee;
+  padding: 10px;
+}
+
+.reminder__header {
+  display: flex;
+}
+
+.header__reminder-id, .header__reminder-title, .header__reminder-status {
+  padding: 5px;
+  margin: 5px;
+  border: 1px lightgray solid;
+  min-width: 20px;
+  text-align: center;
+}
+
+.header__reminder-id {
+
+}
+.header__reminder-title {
+
+}
+.header__reminder-status {
+
+}
