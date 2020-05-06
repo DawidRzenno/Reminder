@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Table(name = "reminders")
 class Reminder {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
 

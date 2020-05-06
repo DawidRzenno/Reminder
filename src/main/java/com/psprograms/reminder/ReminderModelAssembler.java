@@ -13,7 +13,7 @@ public class ReminderModelAssembler implements RepresentationModelAssembler<Remi
         EntityModel<Reminder> reminderModel = new EntityModel<>(
             reminder,
             linkTo(methodOn(ReminderController.class).getReminderById(reminder.getId())).withSelfRel(),
-            linkTo(methodOn(ReminderController.class).getAllReminders()).withRel("reminders")
+            linkTo(methodOn(ReminderController.class).getAllReminders(0)).withRel("reminders")
         );
         if(reminder.getStatus() == ReminderStatus.TO_DO) {
             reminderModel.add(

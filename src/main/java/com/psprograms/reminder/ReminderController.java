@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -33,14 +35,16 @@ class ReminderController {
         this.reminderAssembler = reminderAssembler;
     }
 
-    @GetMapping("/reminder")
-    CollectionModel<EntityModel<Reminder>> getAllReminders() {
-        List<EntityModel<Reminder>> reminderModel = reminderRepository.findAll(Sort.by(Sort.Direction.ASC, "id"))
+    @GetMapping("/reminder/page/{page}")
+    CollectionModel<EntityModel<Reminder>> getAllReminders(@PathVariable int page) {
+        Pageable xPageWithFiveElementsSortById = PageRequest.of(page, 5, Sort.by("id").ascending());
+
+        List<EntityModel<Reminder>> reminderModel = reminderRepository.findAll(xPageWithFiveElementsSortById)
             .stream()
             .map(reminderAssembler::toModel)
             .collect(Collectors.toList());
 
-        return new CollectionModel<>(reminderModel, linkTo(methodOn(ReminderController.class).getAllReminders()).withSelfRel());
+        return new CollectionModel<>(reminderModel, linkTo(methodOn(ReminderController.class).getAllReminders(page)).withSelfRel());
     }
 
     @GetMapping("/reminder/{reminderId}")
