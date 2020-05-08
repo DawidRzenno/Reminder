@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.psprograms</groupId>
 	<artifactId>reminder</artifactId>
-	<version>0.0.2</version>
+	<version>0.0.3</version>
 	<name>Reminder</name>
 	<description>Reminder</description>
 
@@ -19,7 +19,6 @@
 	</properties>
 
 	<dependencies>
-
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
@@ -60,9 +59,14 @@
 					<artifactId>junit-vintage-engine</artifactId>
 				</exclusion>
 			</exclusions>
+
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>

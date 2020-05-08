@@ -1,6 +1,6 @@
 package com.psprograms.reminder;
 
 enum ReminderType {
-    ONE_TIME,
+    STANDARD,
     REPEAT
 }

@@ -10,15 +10,15 @@ import java.util.List;
 
 @Service
 class ReminderService {
-    private final ReminderRepository reminderRepository;
+    private final Logger logger = LoggerFactory.getLogger(ReminderService.class);
 
-    Logger logger = LoggerFactory.getLogger(ReminderService.class);
+    private final ReminderRepository reminderRepository;
 
     public ReminderService(ReminderRepository reminderRepository) {
         this.reminderRepository = reminderRepository;
     }
 
-    @Scheduled(fixedDelay = 3600000)
+    @Scheduled(fixedDelay = 900000)
     public void deleteOutdatedReminder() {
         LocalDate now = LocalDate.now();
 
