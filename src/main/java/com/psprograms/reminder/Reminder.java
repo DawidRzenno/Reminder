@@ -28,15 +28,18 @@ class Reminder {
     @Column(name = "target_date", nullable = false, columnDefinition = "DATE")
     private LocalDate targetDate;
 
-    @Column(name = "target_time", nullable = true, columnDefinition = "TIME")
+    @Column(name = "target_time", columnDefinition = "TIME")
     private LocalTime targetTime;
 
     @Column(name = "status", nullable = false, columnDefinition = "VARCHAR(32)")
     private ReminderStatus status;
 
+    @Column(name = "type", nullable = false, columnDefinition = "VARCHAR(32)")
+    private ReminderType type;
+
     public Reminder() {}
 
-    public Reminder(String title, String content, LocalDate targetDate, LocalTime targetTime) {
+    public Reminder(String title, String content, LocalDate targetDate, LocalTime targetTime, ReminderType type) {
         this.title = title;
         this.content = content;
 
@@ -45,6 +48,7 @@ class Reminder {
         this.targetTime = targetTime;
 
         this.status = ReminderStatus.TO_DO;
+        this.type = type;
     }
 
     public void setId(Long id) {
@@ -75,6 +79,8 @@ class Reminder {
         this.status = status;
     }
 
+    public void setType(ReminderType type) { this.type = type; }
+
     public Long getId() {
         return id;
     }
@@ -102,4 +108,6 @@ class Reminder {
     public ReminderStatus getStatus() {
         return status;
     }
+
+    public ReminderType getType() { return type; }
 }

@@ -27,8 +27,8 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RestController
 class ReminderController {
-    private ReminderRepository reminderRepository;
-    private ReminderModelAssembler reminderAssembler;
+    private final ReminderRepository reminderRepository;
+    private final ReminderModelAssembler reminderAssembler;
 
     public ReminderController(ReminderRepository reminderRepository, ReminderModelAssembler reminderAssembler) {
         this.reminderRepository = reminderRepository;
