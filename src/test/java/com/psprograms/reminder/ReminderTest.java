@@ -1,43 +1,47 @@
 package com.psprograms.reminder;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
-public class ReminderBasicTest {
-    private final Logger logger = LoggerFactory.getLogger(ReminderBasicTest.class);
+public class ReminderTest {
+    private final Logger logger = LoggerFactory.getLogger(ReminderTest.class);
 
     private final Pageable pageable = PageRequest.of(0, 10, Sort.by("id").ascending());
 
     @Autowired
     private ReminderRepository reminderRepository;
 
-    @Before
-    public void setUp() {
-        logger.info("Saving reminders to the database...");
+    @BeforeEach
+    public void initiateDatabaseForTests() {
+        logger.info("Deleting all reminders from the database...");
+        reminderRepository.deleteAll();
 
-        reminderRepository.save(new Reminder("Test", "A testing reminder.",
-                LocalDate.now(), null, ReminderType.STANDARD));
-        reminderRepository.save(new Reminder("Test 2", "A testing reminder.",
-                LocalDate.now(), LocalTime.parse("10:00:00"), ReminderType.STANDARD));
+        logger.info("Saving new reminders to the database...");
 
-        logger.info("Test reminders saved to the database.");
+        Reminder reminder1 = new Reminder("Test", "A testing reminder.",
+                LocalDate.now(), null, ReminderType.STANDARD);
+        Reminder reminder2 = new Reminder("Test 2", "A testing reminder.",
+                LocalDate.now(), LocalTime.parse("10:00:00"), ReminderType.STANDARD);
+
+        reminderRepository.save(reminder1);
+        logger.info("Entity with ID: " + reminder1.getId() + " has been saved to the database.");
+        reminderRepository.save(reminder2);
+        logger.info("Entity with ID: " + reminder2.getId() + " has been saved to the database.");
     }
 
     @Test
@@ -46,8 +50,7 @@ public class ReminderBasicTest {
 
         List<Reminder> reminders = reminderRepository.findAll(pageable).stream()
                 .peek(reminder -> {
-                    logger.info("[Reminder] ID: " + reminder.getId() + " - Title: " + reminder.getTitle()
-                            + " - Content: " + reminder.getContent());
+                    logger.info("[Reminder] ID: " + reminder.getId() + " - Title: " + reminder.getTitle() + " - Content: " + reminder.getContent());
                 })
                 .collect(Collectors.toList());
 
@@ -61,8 +64,7 @@ public class ReminderBasicTest {
 
             reminderRepository.save(reminder);
 
-            logger.info("[Reminder] ID: " + reminder.getId() + " - Title: " + reminder.getTitle()
-                    + " - Content: " + reminder.getContent());
+            logger.info("[Reminder] ID: " + reminder.getId() + " - Title: " + reminder.getTitle() + " - Content: " + reminder.getContent());
         });
 
         logger.info("Reminders are modifiable.");
@@ -80,7 +82,7 @@ public class ReminderBasicTest {
 
                                 throw new ResourceNotFoundException(reminder.getId());
                             });
-                    logger.info("Reminder of ID: " + reminder.getId() + " exists.");
+                    logger.info("[Reminder] ID: " + reminder.getId() + " - Title: " + reminder.getTitle() + " - Content: " + reminder.getContent());
                 })
                 .collect(Collectors.toList());
 
