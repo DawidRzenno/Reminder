@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.psprograms</groupId>
 	<artifactId>reminder</artifactId>
-	<version>0.0.3</version>
+	<version>0.1.0</version>
 	<name>Reminder</name>
 	<description>Simple reminder app</description>
 

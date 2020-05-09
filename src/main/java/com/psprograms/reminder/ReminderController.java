@@ -37,7 +37,7 @@ class ReminderController {
 
     @GetMapping("/reminder/page/{page}")
     CollectionModel<EntityModel<Reminder>> getAllReminders(@PathVariable int page) {
-        Pageable xPageWithFiveElementsSortById = PageRequest.of(page, 5, Sort.by("id").ascending());
+        Pageable xPageWithFiveElementsSortById = PageRequest.of(page, 10, Sort.by("id").ascending());
 
         List<EntityModel<Reminder>> reminderModel = reminderRepository.findAll(xPageWithFiveElementsSortById)
             .stream()
@@ -87,7 +87,7 @@ class ReminderController {
             .body(reminderModel);
     }
 
-    @PatchMapping("/reminder/{reminderId}/in-progress")
+    @PatchMapping("/reminder/{reminderId}/set-status/in-progress")
     ResponseEntity<?> updateInProgressReminder(@PathVariable Long reminderId) throws ResourceNotFoundException {
         Reminder reminder = reminderRepository.findById(reminderId)
             .orElseThrow(() -> new ResourceNotFoundException(reminderId));
@@ -104,7 +104,7 @@ class ReminderController {
             .build();
     }
 
-    @PatchMapping("/reminder/{reminderId}/completed")
+    @PatchMapping("/reminder/{reminderId}/set-status/completed")
     ResponseEntity<?> updateCompletedReminder(@PathVariable Long reminderId) throws ResourceNotFoundException {
         Reminder reminder = reminderRepository.findById(reminderId)
             .orElseThrow(() -> new ResourceNotFoundException(reminderId));
@@ -121,7 +121,7 @@ class ReminderController {
             .build();
     }
 
-    @PatchMapping("/reminder/{reminderId}/undo-completed") 
+    @PatchMapping("/reminder/{reminderId}/set-status/undo-completed")
     ResponseEntity<?> undoCompletedReminder(@PathVariable Long reminderId) throws ResourceNotFoundException {
         Reminder reminder = reminderRepository.findById(reminderId)
             .orElseThrow(() -> new ResourceNotFoundException(reminderId));

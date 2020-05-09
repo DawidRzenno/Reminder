@@ -1,7 +1,5 @@
 package com.psprograms.reminder;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -18,8 +16,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @SpringBootTest
-public class ReminderTest {
-    private final Logger logger = LoggerFactory.getLogger(ReminderTest.class);
+public class ReminderRepositoryTest {
+    private final Logger logger = LoggerFactory.getLogger(ReminderRepositoryTest.class);
 
     private final Pageable pageable = PageRequest.of(0, 10, Sort.by("id").ascending());
 
